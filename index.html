@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ai Doctor</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+
+    <header>
+        <h1>IA Doctor</h1>
+        <p>Sistema de Triagem Virtual</p>
+    </header>
+
+    <main class="container">
+
+        <section class="card">
+            <h2>Identificação do paciente</h2>
+
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome"
+                   placeholder="Digite seu nome">
+
+            <h2>Informações dos sintomas</h2>
+
+            <label for="sintoma">Selecione o sintoma:</label>
+
+            <select id="sintoma">
+                <option value="">Escolha uma opção</option>
+                <option value="febre">Febre</option>
+                <option value="dor">Dor de cabeça</option>
+                <option value="tosse">Tosse</option>
+                <option value="gripe">Dor no corpo</option>
+                <option value="enjoo">Enjoo</option>
+            </select>
+
+            <label for="descricao">
+                Descreva o que está sentindo:
+            </label>
+
+            <textarea id="descricao"
+                placeholder="Descreva seus sintomas..."></textarea>
+
+            <button onclick="realizarTriagem()">
+                Realizar triagem
+            </button>
+
+        </section>
+
+        <section class="resultado" id="resultado">
+            <h2>Resultado da triagem</h2>
+            <p>Preencha as informações para receber
+            orientações simuladas.</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>
+            <strobg>Alunos:</strobg> Beatriz Eduarda e Vítor Santos
+          
+        </p>
+        <p>
+              Turma: 1 TÉC B
+        </p>
+    </footer>
+
+    <script>
+        function realizarTriagem() {
+
+            let nome = document.getElementById("nome").value;
+            let sintoma = document.getElementById("sintoma").value;
+            let descricao = document.getElementById("descricao").value;
+
+            let resultado = document.getElementById("resultado");
+
+            if (nome === "" || sintoma === "") {
+                alert("Preencha seu nome e selecione um sintoma!");
+                return;
+            }
+
+            let orientacao = "";
+
+            switch (sintoma) {
+
+                case "febre":
+                    orientacao = "Procure avaliação profissional para investigar a febre. Observe a evolução dos sintomas.";
+                    break;
+
+                case "dor":
+                    orientacao = "Observe a intensidade e a duração da dor. Procure avaliação profissional se persistir.";
+                    break;
+
+                case "tosse":
+                    orientacao = "Observe a frequência da tosse e procure orientação profissional se os sintomas persistirem.";
+                    break;
+
+                case "gripe":
+                    orientacao = "Descanse e observe a evolução dos sintomas. Procure avaliação profissional se necessário.";
+                    break;
+
+                case "enjoo":
+                    orientacao = "Observe se o enjoo está acompanhado de outros sintomas e procure avaliação profissional.";
+                    break;
+            }
+
+            resultado.innerHTML = `
+                <h2>Resultado da triagem</h2>
+
+                <p><strong>Paciente:</strong> ${nome}</p>
+
+                <p><strong>Sintoma selecionado:</strong>
+                ${sintoma}</p>
+
+                <p><strong>Descrição:</strong>
+                ${descricao || "Não informada"}</p>
+
+                <h3>Orientação simulada:</h3>
+
+                <p>${orientacao}</p>
+
+                <p class="aviso">
+                    Atenção: este resultado é apenas uma
+                    simulação educativa e não representa
+                    diagnóstico médico.
+                </p>
+            `;
+        }
+    </script>
+
+</body>
+</html>
